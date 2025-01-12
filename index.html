@@ -110,5 +110,68 @@ Sustainability and inclusivity will play key roles in shaping the road ahead. By
     <footer>
         <p>&copy; 2025 India Cricket Website. All rights reserved.</p>
     </footer>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light/Dark Mode Toggle</title>
+    <style>
+        /* Default (Light) Theme */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: white;
+            color: black;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Dark Theme */
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+    
+    <div class="container">
+        <h1>Light/Dark Mode Toggle</h1>
+        <p>Click the button below to switch between light and dark modes.</p>
+        <button onclick="toggleMode()">Toggle Mode</button>
+    </div>
+
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
+
 </body>
 </html>
