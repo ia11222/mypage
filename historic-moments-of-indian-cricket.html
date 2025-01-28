@@ -39,6 +39,37 @@
         }
     </style>
 </head>
+<style>
+    body {
+        font-family: 'Times New Roman', Times, serif;
+        background-color: white;
+        color: black;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .dark-mode {
+        background-color: black;
+        color: white;
+    }
+    .toggle-button {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: #ccc;
+        border: none;
+        border-radius: 5px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+</style>
+
+<button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+    }
+</script>
 <body>
     <header>
         <h1>Historic Moments of Indian Cricket</h1>
