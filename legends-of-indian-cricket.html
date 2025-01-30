@@ -17,10 +17,16 @@
             color: #fff;
             padding: 1rem;
             text-align: center;
+            position: relative; /* Ensures proper placement */
+            z-index: 10; /* Keeps header above other elements */
+            width: 100%;
         }
         nav {
             background: #444;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 0;
         }
         nav a {
             color: #fff;
@@ -37,11 +43,23 @@
             max-width: 900px;
             margin: 0 auto;
         }
+        h1, h2 {
+            color: #333;
+        }
+        .fact-file {
+            margin-left: 20px;
+        }
+        ul {
+            margin-left: 40px;
+        }
     </style>
 </head>
+<body>
+
     <header>
         <h1>Legends of Indian Cricket</h1>
     </header>
+    
     <nav>
         <a href="index.html">Home</a> 
         <a href="historic-moments-of-indian-cricket.html">Historic Moments</a>
