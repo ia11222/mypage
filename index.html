@@ -6,25 +6,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>India Cricket - The Past, Present, and Future</title>
     <style>
+        /* General Styles */
         body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Georgia', serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
         }
 
         header {
-            background: #333;
-            color: #fff;
-            padding: 1rem;
             text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #333, #444);
+            color: #fff;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .cricket-stumps {
+            width: 60px;
+            height: 60px;
+            margin: 1rem auto;
+            position: relative;
+        }
+
+        .stumps {
+            width: 6px;
+            height: 40px;
+            background: #fff;
+            position: absolute;
+            top: 10px;
+            border-radius: 3px;
+        }
+
+        .stump-left {
+            left: 15px;
+        }
+
+        .stump-middle {
+            left: 27px;
+        }
+
+        .stump-right {
+            left: 39px;
+        }
+
+        .bails {
+            width: 40px;
+            height: 6px;
+            background: #fff;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            border-radius: 3px;
+        }
+
+        .ball {
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            left: -20px;
+            animation: bowl 4s infinite ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bowl {
+            0% {
+                left: -20px;
+                transform: rotate(0deg);
+            }
+            20% {
+                left: 24px;
+                transform: rotate(180deg);
+            }
+            40% {
+                left: 24px;
+                transform: rotate(360deg);
+            }
+            60% {
+                left: 24px;
+                transform: rotate(540deg);
+            }
+            80% {
+                left: 24px;
+                transform: rotate(720deg);
+            }
+            100% {
+                left: 70px;
+                transform: rotate(900deg);
+            }
         }
 
         nav {
             background: #444;
             overflow: hidden;
+            text-align: center;
+            padding: 0.5rem 0;
         }
 
         nav a {
@@ -32,11 +125,12 @@
             text-decoration: none;
             padding: 0.8rem 1.5rem;
             display: inline-block;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
 
         nav a:hover {
             background: #555;
+            transform: translateY(-3px);
         }
 
         .container {
@@ -46,23 +140,56 @@
         }
 
         .section {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            list-style-type: square;
+            padding-left: 1.5rem;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
         }
 
         footer {
             background: #333;
             color: #fff;
             text-align: center;
-            padding: 1rem 0;
-            position: relative;
-            bottom: 0;
-            width: 100%;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
         }
 
-        /* Light Mode Styles */
-        .light-mode {
-            background-color: #f4f4f4;
-            color: #333;
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
         }
 
         /* Dark Mode Styles */
@@ -79,12 +206,17 @@
             background: #333;
         }
 
-        .dark-mode footer {
-            background: #222;
+        .dark-mode .section {
+            background: #1e1e1e;
+            color: #e0e0e0;
         }
 
-        .dark-mode a {
-            color: #fff;
+        .dark-mode h2 {
+            color: #e0e0e0;
+        }
+
+        .dark-mode footer {
+            background: #222;
         }
 
         .mode-toggle {
@@ -97,22 +229,33 @@
             padding: 0.5rem 1rem;
             cursor: pointer;
             font-size: 1rem;
-            transition: background-color 0.3s;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .mode-toggle:hover {
             background-color: #555;
+            transform: translateY(-3px);
         }
-
     </style>
 </head>
 
 <body class="light-mode">
     <button class="mode-toggle" onclick="toggleMode()">Switch to Dark Mode</button>
 
+    <!-- Header with Bowling Animation -->
     <header>
         <h1>India Cricket - The Past, Present, and Future</h1>
+        <div class="cricket-stumps">
+            <div class="stumps stump-left"></div>
+            <div class="stumps stump-middle"></div>
+            <div class="stumps stump-right"></div>
+            <div class="bails"></div>
+            <div class="ball"></div>
+        </div>
     </header>
+
+    <!-- Navigation Bar -->
     <nav>
         <a href="historic-moments-of-indian-cricket.html">Historic Moments</a>
         <a href="legends-of-indian-cricket.html">Legends</a>
@@ -120,27 +263,33 @@
         <a href="through-the-years-of-indian-cricket.html">Through the Years</a>
         <a href="awards-and-honourable-mentions-of-indian-cricket.html">Awards & Honourable Mentions</a>
     </nav>
+
+    <!-- Main Content -->
     <div class="container">
         <div class="section">
             <h2>Introduction</h2>
             <p>Indian cricket has been a symphony of resilience, triumphs, and transformations. From its nascent days in the colonial era to its commanding presence in the global cricketing landscape today, the journey has been nothing short of extraordinary. With each passing decade, Indian cricket has evolved, not only redefining its own identity but also becoming a cultural phenomenon that unites millions.</p>
             <p>The essence of Indian cricket lies in its ability to reflect the aspirations and emotions of an entire nation. It is not merely a sport but a shared narrative of struggle, progress, and excellence that resonates deeply with fans across generations. The sport’s journey mirrors India’s rise on the global stage, intertwining the growth of cricket with the country’s social, cultural, and economic evolution.</p>
         </div>
+
         <div class="section">
             <h2>A Journey Through the Years</h2>
             <p>The story of Indian cricket is one of growth and adaptation. Emerging on the international stage in the early 20th century, the team initially faced formidable challenges, often overshadowed by more experienced opponents. Yet, through sheer determination and an undying passion for the sport, India gradually built its foundation. Over the years, it transitioned from an underdog to a powerhouse, marking its presence with remarkable achievements that brought the nation pride and recognition.</p>
             <p>As time progressed, Indian cricket embraced modern strategies and innovations, integrating technology and analytical tools to refine its performance. This era of transformation was complemented by robust domestic tournaments that honed emerging talents. India’s ability to blend tradition with modernity has played a pivotal role in cementing its dominance on the world stage.</p>
         </div>
+
         <div class="section">
             <h2>The Current Era</h2>
             <p>Today, Indian cricket is synonymous with excellence. With an infrastructure that rivals the best in the world, an unparalleled fan base, and a fiercely competitive domestic circuit, the country continues to produce world-class players. Its performances in international tournaments consistently reinforce its stature as a team that blends skill, strategy, and resilience. Furthermore, the culture of cricket in India has transcended the boundaries of the game, becoming a unifying force and an indelible part of the nation’s identity.</p>
             <p>This era is defined by an unwavering pursuit of innovation. From advanced fitness regimes to data-driven decision-making, Indian cricket embraces cutting-edge methods to stay ahead in the global arena. The seamless integration of modernity into traditional cricketing values ensures that the team remains a formidable force while maintaining the spirit of the game.</p>
         </div>
+
         <div class="section">
             <h2>The Road Ahead</h2>
             <p>The future of Indian cricket promises a thrilling blend of challenges and opportunities. With the emergence of new formats and evolving dynamics in global cricket, the team is poised to chart new territories. The emphasis on nurturing young talent, coupled with strategic planning and strong leadership, ensures that India remains at the forefront of world cricket. As the cricketing world moves towards an era of rapid evolution, Indian cricket is well-positioned to continue its legacy of excellence, setting benchmarks for future generations to aspire to.</p>
             <p>Sustainability and inclusivity will play key roles in shaping the road ahead. By investing in grassroots development and fostering diversity in the sport, Indian cricket is creating a robust ecosystem that ensures long-term success. This vision extends beyond winning matches—it aims to make cricket a source of inspiration and joy for billions worldwide.</p>
         </div>
+
         <div class="section">
             <h2>What This Website Offers</h2>
             <p>This website takes you through the fascinating journey of Indian cricket. Explore the different sections:</p>
@@ -153,10 +302,13 @@
             </ul>
         </div>
     </div>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 India Cricket Website. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript for Dark Mode Toggle -->
     <script>
         function toggleMode() {
             const body = document.body;
