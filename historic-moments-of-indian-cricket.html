@@ -5,87 +5,323 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historic Moments of Indian Cricket</title>
     <style>
+        /* General Styles */
         body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Georgia', serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            line-height: 1.6;
         }
+
         header {
-            background: #333;
-            color: #fff;
-            padding: 1rem;
             text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #333, #444);
+            color: #fff;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            overflow: hidden;
         }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .cricket-stumps {
+            width: 60px;
+            height: 60px;
+            margin: 1rem auto;
+            position: relative;
+        }
+
+        .stumps {
+            width: 6px;
+            height: 40px;
+            background: #fff;
+            position: absolute;
+            top: 10px;
+            border-radius: 3px;
+        }
+
+        .stump-left {
+            left: 15px;
+        }
+
+        .stump-middle {
+            left: 27px;
+        }
+
+        .stump-right {
+            left: 39px;
+        }
+
+        .bails {
+            width: 40px;
+            height: 6px;
+            background: #fff;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            border-radius: 3px;
+        }
+
+        .ball {
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            left: -20px;
+            animation: bowl 4s infinite ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bowl {
+            0% {
+                left: -20px;
+                transform: rotate(0deg);
+            }
+            20% {
+                left: 24px;
+                transform: rotate(180deg);
+            }
+            40% {
+                left: 24px;
+                transform: rotate(360deg);
+            }
+            60% {
+                left: 24px;
+                transform: rotate(540deg);
+            }
+            80% {
+                left: 24px;
+                transform: rotate(720deg);
+            }
+            100% {
+                left: 70px;
+                transform: rotate(900deg);
+            }
+        }
+
         nav {
             background: #444;
             overflow: hidden;
+            text-align: center;
+            padding: 0.5rem 0;
         }
+
         nav a {
             color: #fff;
             text-decoration: none;
             padding: 0.8rem 1.5rem;
             display: inline-block;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
+
         nav a:hover {
             background: #555;
+            transform: translateY(-3px);
         }
+
         .container {
             padding: 2rem;
             max-width: 900px;
             margin: 0 auto;
         }
+
+        .section {
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            list-style-type: square;
+            padding-left: 1.5rem;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .dark-mode header {
+            background: #222;
+        }
+
+        .dark-mode nav {
+            background: #333;
+        }
+
+        .dark-mode .section {
+            background: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        .dark-mode h2 {
+            color: #e0e0e0;
+        }
+
+        .dark-mode footer {
+            background: #222;
+        }
+
+        .mode-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .mode-toggle:hover {
+            background-color: #555;
+            transform: translateY(-3px);
+        }
     </style>
 </head>
-<button class="mode-toggle" onclick="toggleMode()">Switch to Dark Mode</button>
+<body class="light-mode">
+    <button class="mode-toggle" onclick="toggleMode()">Switch to Dark Mode</button>
 
-<body>
+    <!-- Header with Bowling Animation -->
     <header>
         <h1>Historic Moments of Indian Cricket</h1>
+        <div class="cricket-stumps">
+            <div class="stumps stump-left"></div>
+            <div class="stumps stump-middle"></div>
+            <div class="stumps stump-right"></div>
+            <div class="bails"></div>
+            <div class="ball"></div>
+        </div>
     </header>
+
+    <!-- Navigation Bar -->
     <nav>
-        <a href="index.html">Home</a> 
+        <a href="index.html">Home</a>
         <a href="legends-of-indian-cricket.html">Legends</a>
         <a href="rivals-of-indian-cricket.html">Rivals</a>
         <a href="through-the-years-of-indian-cricket.html">Through the Years</a>
         <a href="awards-and-honourable-mentions-of-indian-cricket.html">Awards & Honourable Mentions</a>
     </nav>
+
+    <!-- Main Content -->
     <div class="container">
-        <h2>Introduction</h2>
-<p>The journey of Indian cricket is a remarkable tale of triumph, resilience, and evolution. From its humble beginnings as a colonial pastime to its current status as a global cricketing superpower, Indian cricket has traversed an extraordinary path. Its milestones reflect not only the team’s on-field accomplishments but also a nation’s ability to dream and overcome challenges. Over the decades, the team has continually evolved, embracing new formats, refining strategies, and nurturing talent to assert its dominance on the world stage.</p>
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>The journey of Indian cricket is a remarkable tale of triumph, resilience, and evolution. From its humble beginnings as a colonial pastime to its current status as a global cricketing superpower, Indian cricket has traversed an extraordinary path. Its milestones reflect not only the team’s on-field accomplishments but also a nation’s ability to dream and overcome challenges. Over the decades, the team has continually evolved, embracing new formats, refining strategies, and nurturing talent to assert its dominance on the world stage.</p>
+            <p>The history of Indian cricket is filled with landmark victories, unforgettable moments, and the ability to perform under pressure. Each match, series, and achievement contributes to an enduring legacy. As we revisit these incredible moments, we celebrate the countless players, fans, and memories that have propelled Indian cricket into the hearts of millions. This page delves into India’s most iconic victories, pivotal matches, and defining moments that have shaped its rich cricketing heritage.</p>
+        </div>
 
-<p>The history of Indian cricket is filled with landmark victories, unforgettable moments, and the ability to perform under pressure. Each match, series, and achievement contributes to an enduring legacy. As we revisit these incredible moments, we celebrate the countless players, fans, and memories that have propelled Indian cricket into the hearts of millions. This page delves into India’s most iconic victories, pivotal matches, and defining moments that have shaped its rich cricketing heritage.</p>
+        <div class="section">
+            <h2>India’s World Cup Triumphs</h2>
+            <h3>1983 Cricket World Cup</h3>
+            <p>India's first World Cup victory in 1983 stands as one of the most celebrated moments in cricket history. Under the leadership of Kapil Dev, the team defied expectations by defeating the mighty West Indies in the final at Lord’s. The underdog Indian side, dismissed as unlikely contenders, stunned the cricketing world with grit and determination. Kapil Dev’s iconic 175* against Zimbabwe in a crucial group-stage match is still remembered as one of the finest innings in ODI history. In the final, India’s resolute bowling and fielding turned the tables on a dominant West Indies team, propelling Indian cricket into the global spotlight.</p>
 
-<h2>India’s World Cup Triumphs</h2>
+            <h3>2007 ICC T20 World Cup</h3>
+            <p>The inaugural ICC T20 World Cup in 2007 marked a groundbreaking moment for the shortest format of the game. Under the fearless leadership of MS Dhoni, India captured the imagination of fans with thrilling performances. The final against Pakistan was a nerve-wracking encounter that ended with India securing a five-run victory in the last over. Yuvraj Singh’s six sixes in an over against Stuart Broad became one of the most iconic moments in T20 cricket. This victory not only heralded India's dominance in T20s but also sparked a revolution in the game’s global popularity.</p>
 
-<h3>1983 Cricket World Cup</h3>
-<p>India's first World Cup victory in 1983 stands as one of the most celebrated moments in cricket history. Under the leadership of Kapil Dev, the team defied expectations by defeating the mighty West Indies in the final at Lord’s. The underdog Indian side, dismissed as unlikely contenders, stunned the cricketing world with grit and determination. Kapil Dev’s iconic 175* against Zimbabwe in a crucial group-stage match is still remembered as one of the finest innings in ODI history. In the final, India’s resolute bowling and fielding turned the tables on a dominant West Indies team, propelling Indian cricket into the global spotlight.</p>
+            <h3>2011 ICC Cricket World Cup</h3>
+            <p>The 2011 World Cup victory is etched in the hearts of Indian cricket fans as the moment when the team lifted the trophy on home soil. With key contributions throughout the tournament, including Yuvraj Singh’s all-round brilliance, India made it to the final. Gautam Gambhir’s gritty 97 set the foundation, and MS Dhoni sealed the deal with a towering six, a moment immortalized in cricketing lore. This victory wasn’t just about reclaiming the ODI crown; it was a culmination of years of hard work and unity.</p>
 
-<h3>2007 ICC T20 World Cup</h3>
-<p>The inaugural ICC T20 World Cup in 2007 marked a groundbreaking moment for the shortest format of the game. Under the fearless leadership of MS Dhoni, India captured the imagination of fans with thrilling performances. The final against Pakistan was a nerve-wracking encounter that ended with India securing a five-run victory in the last over. Yuvraj Singh’s six sixes in an over against Stuart Broad became one of the most iconic moments in T20 cricket. This victory not only heralded India's dominance in T20s but also sparked a revolution in the game’s global popularity.</p>
+            <h3>2013 ICC Champions Trophy</h3>
+            <p>Although it wasn’t a World Cup, the 2013 Champions Trophy victory further demonstrated India’s dominance in limited-overs cricket. Rain played a significant role in the final against England, reducing it to a 20-over contest. Despite the challenges, India emerged victorious thanks to stellar performances by Ravindra Jadeja and the bowling unit. This triumph highlighted India’s adaptability in high-pressure scenarios and capped off an era of white-ball cricket success.</p>
 
-<h3>2011 ICC Cricket World Cup</h3>
-<p>The 2011 World Cup victory is etched in the hearts of Indian cricket fans as the moment when the team lifted the trophy on home soil. With key contributions throughout the tournament, including Yuvraj Singh’s all-round brilliance, India made it to the final. Gautam Gambhir’s gritty 97 set the foundation, and MS Dhoni sealed the deal with a towering six, a moment immortalized in cricketing lore. This victory wasn’t just about reclaiming the ODI crown; it was a culmination of years of hard work and unity.</p>
+            <h3>2024 ICC T20I World Cup</h3>
+            <p>India's triumph in the 2024 T20I World Cup reaffirmed its status as a global cricketing superpower. Held in the Caribbean and the United States, this tournament showcased India’s adaptability and versatility in varying conditions. The team’s batting depth, sharp bowling, and exceptional fielding were on full display throughout the competition. The final against England was a thrilling affair, with India defending a competitive total through disciplined bowling and remarkable composure under pressure. This victory was not just about winning a trophy but also about establishing a legacy in the modern era of cricket.</p>
+        </div>
 
-<h3>2013 ICC Champions Trophy</h3>
-<p>Although it wasn’t a World Cup, the 2013 Champions Trophy victory further demonstrated India’s dominance in limited-overs cricket. Rain played a significant role in the final against England, reducing it to a 20-over contest. Despite the challenges, India emerged victorious thanks to stellar performances by Ravindra Jadeja and the bowling unit. This triumph highlighted India’s adaptability in high-pressure scenarios and capped off an era of white-ball cricket success.</p>
+        <div class="section">
+            <h2>Iconic Matches and Unforgettable Wins</h2>
+            <h3>The 2001 Eden Gardens Test (India vs. Australia)</h3>
+            <p>The second Test of the 2001 Border-Gavaskar series at Eden Gardens is regarded as one of the greatest Test matches ever played. Following on, India staged a miraculous comeback with VVS Laxman’s monumental 281 and Rahul Dravid’s steadfast 180. Harbhajan Singh’s sensational bowling, including a historic hat-trick, dismantled Australia’s formidable lineup. This victory ended Australia’s record-breaking 16-match winning streak and established India as a force to reckon with in Test cricket. This match is widely seen as a turning point in Indian cricket history, as the team shed its underdog status and began playing with confidence and resilience. The win unified fans across the country and remains a source of pride for Indian cricket.</p>
 
-<h3>2024 ICC T20I World Cup</h3>
-<p>India's triumph in the 2024 T20I World Cup reaffirmed its status as a global cricketing superpower. Held in the Caribbean and the United States, this tournament showcased India’s adaptability and versatility in varying conditions. The team’s batting depth, sharp bowling, and exceptional fielding were on full display throughout the competition. The final against England was a thrilling affair, with India defending a competitive total through disciplined bowling and remarkable composure under pressure. This victory was not just about winning a trophy but also about establishing a legacy in the modern era of cricket.</p>
+            <h3>NatWest Series Final 2002 (India vs. England)</h3>
+            <p>The NatWest Series final at Lord’s saw India chase down 325 runs in dramatic fashion. After an early collapse, Yuvraj Singh and Mohammad Kaif stitched together a remarkable partnership, leading India to a memorable victory.</p>
+        </div>
 
-<h2>Iconic Matches and Unforgettable Wins</h2>
+        <div class="section">
+            <h2>Conclusion</h2>
+            <p>Indian cricket’s journey has been a tale of perseverance, transformation, and triumph. From the historic 1983 World Cup victory that ignited a cricketing revolution to the recent 2024 T20I World Cup win, India has consistently evolved to meet the demands of the modern game. Along the way, legendary players, unforgettable matches, and defining moments have shaped its legacy.</p>
+            <p>Each milestone has not only strengthened India’s standing in world cricket but has also inspired generations of fans and cricketers. The resilience shown in Test victories, the dominance in white-ball cricket, and the ability to perform under pressure have cemented India’s place as a true cricketing powerhouse. As the journey continues, Indian cricket remains a symbol of passion, dedication, and excellence, with many more chapters yet to be written in its glorious history.</p>
+        </div>
+    </div>
 
-<h3>The 2001 Eden Gardens Test (India vs. Australia)</h3>
-<p>The second Test of the 2001 Border-Gavaskar series at Eden Gardens is regarded as one of the greatest Test matches ever played. Following on, India staged a miraculous comeback with VVS Laxman’s monumental 281 and Rahul Dravid’s steadfast 180. Harbhajan Singh’s sensational bowling, including a historic hat-trick, dismantled Australia’s formidable lineup. This victory ended Australia’s record-breaking 16-match winning streak and established India as a force to reckon with in Test cricket. This match is widely seen as a turning point in Indian cricket history, as the team shed its underdog status and began playing with confidence and resilience. The win unified fans across the country and remains a source of pride for Indian cricket.</p>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 India Cricket Website. All rights reserved.</p>
+    </footer>
 
-<h3>NatWest Series Final 2002 (India vs. England)</h3>
-<p>The NatWest Series final at Lord’s saw India chase down 325 runs in dramatic fashion. After an early collapse, Yuvraj Singh and Mohammad Kaif stitched together a remarkable partnership, leading India to a memorable victory.</p>
+    <!-- JavaScript for Dark Mode Toggle -->
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            const modeToggleButton = document.querySelector('.mode-toggle');
 
-<h2>Conclusion</h2>
-<p>Indian cricket’s journey has been a tale of perseverance, transformation, and triumph. From the historic 1983 World Cup victory that ignited a cricketing revolution to the recent 2024 T20I World Cup win, India has consistently evolved to meet the demands of the modern game. Along the way, legendary players, unforgettable matches, and defining moments have shaped its legacy.</p>
+            body.classList.toggle('dark-mode');
 
-<p>Each milestone has not only strengthened India’s standing in world cricket but has also inspired generations of fans and cricketers. The resilience shown in Test victories, the dominance in white-ball cricket, and the ability to perform under pressure have cemented India’s place as a true cricketing powerhouse. As the journey continues, Indian cricket remains a symbol of passion, dedication, and excellence, with many more chapters yet to be written in its glorious history.</p>
+            if (body.classList.contains('dark-mode')) {
+                modeToggleButton.textContent = 'Switch to Light Mode';
+            } else {
+                modeToggleButton.textContent = 'Switch to Dark Mode';
+            }
+        }
+    </script>
 </body>
 </html>
